@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+    <select id="findUserById" parameterType="int" resultType="cn.com.mybatis.po.User">
+        select * from USER where id=#{id}
+        </select>
+    <select  id="findUserByUsername" parameterType="java.lang.String" resultType="cn.com.mybatis.po.User">
+        select * from USER where username like '%${value}%'
+    </select>
+    <insert  id="insertuser" parameterType="cn.com.mybatis.po.User">
+        INSERT INTO user (username,password,gender,email,province,city,birthday) 
+        VALUES
+        (#{username},#{password},#{gender},#{email},#{province},#{city},#{birthday,jdbcType=DATE});
+    </insert>
+    
+    <select id="findBatchCustomer"  resultType="cn.com.mybatis.po.BatchCustomer">
+        select batch.*,customer.username,customer.acno from batch,customer 
+        where batch.cus_id=customer.cus_id
+    </select>
+
+</mapper>
